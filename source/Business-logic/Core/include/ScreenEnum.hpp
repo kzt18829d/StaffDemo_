@@ -1,0 +1,15 @@
+#ifndef STAFFDEMO_REFACTOR_SCREENENUM_HPP
+#define STAFFDEMO_REFACTOR_SCREENENUM_HPP
+
+///@enum ScreenType
+///@brief Enum-класс типов экранов
+enum class ScreenType {
+    NULL_SCREEN,
+    START_SCREEN,
+    LOAD_EMPLOYEE_SCREEN,
+    BASE_SCREEN,
+    SETTINGS_SCREEN,
+    EDIT_EMPLOYEES_SCREEN
+};
+
+#endif //STAFFDEMO_REFACTOR_SCREENENUM_HPP
