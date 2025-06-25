@@ -35,6 +35,7 @@ namespace core {
         std::shared_ptr<viewModel::StartScreenViewModel> startScreenViewModel;
 
 
+
         boost::signals2::connection updateViewRequestConnection;
         boost::signals2::connection navigateFromLoadRepositoryScreen;
         boost::signals2::connection navigateFromBaseScreen;

@@ -1,5 +1,5 @@
 add_library(UI-ViewModel STATIC
-        include/StartScreenViewModel.cpp
+        src/StartScreenViewModel.cpp
         include/StartScreenViewModel.hpp)
 
 target_sources(UI-ViewModel PRIVATE

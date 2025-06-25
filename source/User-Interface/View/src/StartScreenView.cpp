@@ -4,6 +4,7 @@
 
 #include "StartScreenView.hpp"
 #include <ftxui/component/component.hpp>
+#include <utility>
 #include <fmt/core.h>
 namespace view {
     void StartScreenView::updateTranslates() {
@@ -20,8 +21,8 @@ namespace view {
 
     }
 
-    StartScreenView::StartScreenView(std::shared_ptr<viewModel::StartScreenViewModel> sharedPtr) : viewModel(sharedPtr) {
-        windowHeaderText = viewModel->getTranslate("TITLE_1F");
+    StartScreenView::StartScreenView(std::shared_ptr<viewModel::StartScreenViewModel> sharedPtr) : viewModel(std::move(sharedPtr)) {
+        windowHeaderText = viewModel->getTranslate("TITLE_F1");
 
         navigateToNextButtonText = viewModel->getTranslate("VIEW_StartScreen_navigateToNextButton");
         createNewRepositoryText = viewModel->getTranslate("VIEW_StartScreen_createNewRepositoryText");
@@ -31,7 +32,7 @@ namespace view {
         staffDirectoryPath = viewModel->getStaffDirectory();
 
         createNewRepositoryCheckbox = ftxui::Checkbox(&createNewRepositoryText, viewModel->getCreateNewRepository());
-        navigateToNextButton = ftxui::Button(&navigateToNextButtonText, [&]{ viewModel->useDefaultSettings(); });
+        navigateToNextButton = ftxui::Button(fmt::format("{:^{}}", navigateToNextButtonText, navigateToNextButtonText.size()+4), [&]{ viewModel->useDefaultSettings(); });
 
         windowContainer = ftxui::Container::Vertical({
             createNewRepositoryCheckbox,
@@ -47,19 +48,22 @@ namespace view {
         using namespace ftxui;
         auto windowHeader = hbox({
                 filler(),
-                text(fmt::format("{:^{}}",viewModel->getTranslate("TITLE_F1"), 34)) | center | bold,
+                text(fmt::format("{:^{}}", windowHeaderText, 34)) | center | bold,
                 filler()
         }) | bgcolor(theme.bg_primary) | color(theme.text_window_header) | borderStyled(theme.border_window_header);
 
-        auto staffPath = hbox({
-              text(staffDirectoryText),
-              filler() | size(WIDTH, EQUAL, 10),
-              text(staffDirectoryPath)
-        }) | hcenter;
+        auto staffPath = vbox({
+            filler() | size(HEIGHT, EQUAL, 1),
+              text(staffDirectoryText) | hcenter,
+              text("   " + staffDirectoryPath + "   ") | hcenter,
+              filler() | size(HEIGHT, EQUAL, 1),
+        }) | vcenter | borderStyled(ftxui::Color::GrayLight);
 
         auto buttons = vbox({
-            hbox({ createNewRepositoryCheckbox->Render() }) | align_right | color(theme.bg_primary),
-            hbox({ navigateToNextButton->Render() }) | align_right | color(theme.text_primary)
+            hbox({ createNewRepositoryCheckbox->Render() | size(WIDTH, EQUAL, 30) }) | align_right | color(theme.text_base) |
+                    bgcolor(theme.bg_primary),
+            filler() | size(HEIGHT, EQUAL, 1),
+            hbox({ navigateToNextButton->Render() | size(WIDTH, EQUAL, 30) }) | align_right | color(theme.text_success)
         });
 
         return vbox({
@@ -71,7 +75,7 @@ namespace view {
                 vbox({
                     buttons
                 })
-            })
+            }) | borderStyled(theme.border_primary)
         }) | bgcolor(theme.bg_primary) | color(theme.text_primary);
     }
 } // view

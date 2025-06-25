@@ -26,7 +26,7 @@ namespace core {
         void loadLocalizations(nlohmann::json translateJson);
 
         const std::map<std::string, std::string>& dict() const;
-        std::string translate(const std::string& key, const std::unordered_map<std::string, std::string> placeholders = {});
+        std::string translate(const std::string& key, const std::unordered_map<std::string, std::string>& placeholders = {});
     };
 
 

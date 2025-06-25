@@ -46,7 +46,7 @@ namespace theme {
         ThemeColor text_accent              = ftxui::Color::Orange1;           // 214
 
         ThemeColor bg_base                  = ftxui::Color::Black;             // 0
-        ThemeColor bg_primary               = ftxui::Color::White;             // -1
+        ThemeColor bg_primary               = ftxui::Color::Black;             // -1
         ThemeColor bg_secondary             = ftxui::Color::GrayDark;          // 8
         ThemeColor bg_selected              = ftxui::Color::Blue;              // 4
         ThemeColor bg_active                = ftxui::Color::DarkBlue;          // 18

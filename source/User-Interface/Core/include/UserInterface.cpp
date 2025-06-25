@@ -21,6 +21,7 @@ namespace core {
         try {
             fileManager::TranslateStorageProvider storageProvider(appSettings->getLocalizationDirectory());
             storageProvider.loadFromJson();
+            appSettings->translateManager->loadLocalizations(storageProvider.getLanguagePacks());
         } catch (std::exception &ex) {
             std::cerr << std::string(ex.what()) << std::endl;
             system("pause");
@@ -33,7 +34,7 @@ namespace core {
     }
 
     void UserInterface::initTranslates() {
-
+//        appSettings->translateManager->loadLocalizations();
     }
 
     void UserInterface::initThemes() {

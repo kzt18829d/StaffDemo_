@@ -26,7 +26,7 @@ namespace core {
     }
 
     std::string TranslateManager::translate(const std::string &key,
-                                            const std::unordered_map<std::string, std::string> placeholders) {
+                                            const std::unordered_map<std::string, std::string>& placeholders) {
         auto it = localization_map.find(key);
         if (it == localization_map.end()) return "[[" + key + "]]";
 
